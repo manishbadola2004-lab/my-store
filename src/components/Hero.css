@@ -1,0 +1,809 @@
+/* =========================================
+   GLOBAL RESET
+========================================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  overflow-x:hidden;
+  font-family:"Poppins",sans-serif;
+  background:#f8fafc;
+}
+
+/* =========================================
+   HERO SECTION
+========================================= */
+
+.hero-section{
+
+  width:100%;
+
+  min-height:100vh;
+
+  display:grid;
+
+  grid-template-columns:
+  250px 1fr 250px;
+
+  gap:18px;
+
+  padding:18px;
+
+  background:
+  linear-gradient(
+    180deg,
+    #f8fafc 0%,
+    #eef2ff 55%,
+    #dbeafe 100%
+  );
+
+  overflow:hidden;
+
+  position:relative;
+}
+
+/* =========================================
+   SIDE SLIDERS
+========================================= */
+
+.side-slider{
+
+  height:88vh;
+
+  border-radius:28px;
+
+  overflow:hidden;
+
+  position:relative;
+
+  box-shadow:
+  0 15px 40px rgba(0,0,0,0.08);
+
+  background:#000;
+}
+
+.side-slider .swiper{
+  height:100%;
+}
+
+.poster-card{
+
+  width:100%;
+  height:88vh;
+
+  position:relative;
+
+  overflow:hidden;
+
+  cursor:pointer;
+}
+
+.poster-card img{
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  transition:
+  transform 0.7s ease;
+}
+
+.poster-card:hover img{
+
+  transform:scale(1.08);
+}
+
+/* =========================================
+   SIDE OVERLAY
+========================================= */
+
+.poster-overlay{
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+  linear-gradient(
+    to top,
+    rgba(0,0,0,0.9),
+    rgba(0,0,0,0.15)
+  );
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:flex-end;
+
+  padding:26px 22px;
+
+  color:white;
+}
+
+.poster-overlay span{
+
+  width:fit-content;
+
+  display:flex;
+  align-items:center;
+
+  gap:7px;
+
+  padding:8px 14px;
+
+  border-radius:40px;
+
+  background:
+  rgba(255,255,255,0.14);
+
+  backdrop-filter:blur(10px);
+
+  font-size:12px;
+
+  margin-bottom:15px;
+
+  border:
+  1px solid rgba(255,255,255,0.12);
+}
+
+.poster-overlay h2{
+
+  font-size:32px;
+
+  line-height:1.15;
+
+  margin-bottom:10px;
+
+  font-weight:800;
+}
+
+.poster-overlay p{
+
+  font-size:14px;
+
+  color:#e5e7eb;
+
+  line-height:1.6;
+
+  margin-bottom:20px;
+}
+
+.poster-overlay button{
+
+  width:fit-content;
+
+  border:none;
+
+  background:white;
+
+  color:#111827;
+
+  padding:11px 18px;
+
+  border-radius:12px;
+
+  font-size:14px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:0.3s ease;
+}
+
+.poster-overlay button:hover{
+
+  transform:translateY(-3px);
+
+  background:#2563eb;
+
+  color:white;
+}
+
+/* =========================================
+   CENTER HERO
+========================================= */
+
+.hero-slider{
+
+  position:relative;
+
+  height:88vh;
+
+  overflow:hidden;
+
+  border-radius:34px;
+
+  background:#000;
+
+  box-shadow:
+  0 20px 55px rgba(0,0,0,0.14);
+}
+
+.hero-slider .swiper{
+  height:100%;
+}
+
+.main-slide{
+
+  width:100%;
+  height:88vh;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.main-slide img{
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  transition:
+  transform 0.8s ease;
+}
+
+.main-slide:hover img{
+
+  transform:scale(1.04);
+}
+
+/* =========================================
+   OVERLAY
+========================================= */
+
+.dark-overlay{
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+  linear-gradient(
+    to right,
+    rgba(0,0,0,0.84) 15%,
+    rgba(0,0,0,0.48) 45%,
+    rgba(0,0,0,0.16) 100%
+  );
+}
+
+/* =========================================
+   HERO CONTENT
+========================================= */
+
+.hero-content{
+
+  position:absolute;
+
+  top:50%;
+  left:7%;
+
+  transform:translateY(-50%);
+
+  width:100%;
+  max-width:620px;
+
+  z-index:20;
+
+  color:white;
+}
+
+/* TAG */
+
+.hero-tag{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  padding:9px 16px;
+
+  border-radius:50px;
+
+  background:
+  rgba(255,255,255,0.12);
+
+  border:
+  1px solid rgba(255,255,255,0.16);
+
+  backdrop-filter:blur(12px);
+
+  font-size:12px;
+
+  font-weight:600;
+
+  margin-bottom:20px;
+
+  letter-spacing:0.5px;
+}
+
+/* TITLE */
+
+.hero-content h1{
+
+  font-size:72px;
+
+  line-height:1.05;
+
+  font-weight:900;
+
+  letter-spacing:-2px;
+
+  margin-bottom:18px;
+
+  max-width:560px;
+}
+
+/* DESCRIPTION */
+
+.hero-content p{
+
+  font-size:17px;
+
+  line-height:1.8;
+
+  color:#e5e7eb;
+
+  margin-bottom:24px;
+
+  max-width:540px;
+}
+
+/* PRICE */
+
+.hero-content h3{
+
+  font-size:32px;
+
+  font-weight:700;
+
+  margin-bottom:26px;
+
+  color:white;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.hero-buttons{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:14px;
+
+  flex-wrap:wrap;
+}
+
+.btn{
+
+  display:inline-flex;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:8px;
+
+  text-decoration:none;
+
+  border-radius:14px;
+
+  transition:0.3s ease;
+
+  font-weight:600;
+
+  white-space:nowrap;
+}
+
+/* BUY BUTTON */
+
+.primary-btn{
+
+  background:white;
+
+  color:#111827;
+
+  padding:12px 20px;
+
+  min-width:150px;
+
+  font-size:14px;
+
+  box-shadow:
+  0 10px 25px rgba(255,255,255,0.12);
+}
+
+.primary-btn:hover{
+
+  transform:translateY(-3px);
+
+  background:#2563eb;
+
+  color:white;
+
+  box-shadow:
+  0 16px 35px rgba(37,99,235,0.35);
+}
+
+/* SECOND BUTTON */
+
+.secondary-btn{
+
+  padding:12px 20px;
+
+  min-width:150px;
+
+  font-size:14px;
+
+  color:white;
+
+  border:
+  1px solid rgba(255,255,255,0.24);
+
+  background:
+  rgba(255,255,255,0.08);
+
+  backdrop-filter:blur(10px);
+}
+
+.secondary-btn:hover{
+
+  background:
+  rgba(255,255,255,0.15);
+
+  transform:translateY(-3px);
+}
+
+/* =========================================
+   NAVIGATION BUTTONS
+========================================= */
+
+.nav-btn{
+
+  position:absolute;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  width:50px;
+  height:50px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:
+  rgba(255,255,255,0.16);
+
+  backdrop-filter:blur(10px);
+
+  color:white;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  z-index:30;
+
+  transition:0.3s ease;
+}
+
+.nav-btn:hover{
+
+  background:white;
+
+  color:#111827;
+
+  transform:
+  translateY(-50%)
+  scale(1.06);
+}
+
+.prev-btn{
+  left:18px;
+}
+
+.next-btn{
+  right:18px;
+}
+
+/* =========================================
+   PAGINATION
+========================================= */
+
+.swiper-pagination{
+
+  padding-bottom:10px !important;
+}
+
+.swiper-pagination-bullet{
+
+  width:10px;
+  height:10px;
+
+  background:white;
+
+  opacity:0.5;
+
+  transition:0.3s ease;
+}
+
+.swiper-pagination-bullet-active{
+
+  width:28px;
+
+  border-radius:20px;
+
+  opacity:1;
+}
+
+/* =========================================
+   LAPTOP
+========================================= */
+
+@media(max-width:1400px){
+
+  .hero-content h1{
+    font-size:60px;
+  }
+
+  .hero-content p{
+    font-size:16px;
+  }
+}
+
+/* =========================================
+   TABLET LARGE
+========================================= */
+
+@media(max-width:1200px){
+
+  .hero-section{
+
+    grid-template-columns:1fr;
+
+    padding:14px;
+  }
+
+  .side-slider{
+    display:none;
+  }
+
+  .hero-slider,
+  .main-slide{
+
+    height:82vh;
+  }
+
+  .hero-content{
+
+    max-width:85%;
+  }
+
+  .hero-content h1{
+
+    font-size:52px;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media(max-width:768px){
+
+  .hero-section{
+
+    padding:10px;
+  }
+
+  .hero-slider,
+  .main-slide{
+
+    height:74vh;
+
+    border-radius:24px;
+  }
+
+  .hero-content{
+
+    left:6%;
+    right:6%;
+
+    max-width:100%;
+  }
+
+  .hero-tag{
+
+    font-size:11px;
+
+    padding:8px 14px;
+  }
+
+  .hero-content h1{
+
+    font-size:40px;
+
+    line-height:1.15;
+
+    margin-bottom:16px;
+  }
+
+  .hero-content p{
+
+    font-size:14px;
+
+    line-height:1.7;
+
+    margin-bottom:18px;
+  }
+
+  .hero-content h3{
+
+    font-size:24px;
+
+    margin-bottom:20px;
+  }
+
+  .hero-buttons{
+
+    gap:10px;
+  }
+
+  .primary-btn,
+  .secondary-btn{
+
+    min-width:135px;
+
+    padding:11px 16px;
+
+    font-size:13px;
+
+    border-radius:12px;
+  }
+
+  .nav-btn{
+
+    width:44px;
+    height:44px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:480px){
+
+  .hero-section{
+
+    padding:6px;
+  }
+
+  .hero-slider,
+  .main-slide{
+
+    height:68vh;
+
+    border-radius:18px;
+  }
+
+  .hero-content{
+
+    left:5%;
+    right:5%;
+
+    top:52%;
+  }
+
+  .hero-tag{
+
+    font-size:10px;
+
+    padding:6px 11px;
+
+    margin-bottom:14px;
+  }
+
+  .hero-content h1{
+
+    font-size:28px;
+
+    line-height:1.18;
+
+    letter-spacing:-1px;
+
+    margin-bottom:12px;
+  }
+
+  .hero-content p{
+
+    font-size:12px;
+
+    line-height:1.55;
+
+    margin-bottom:16px;
+
+    max-width:100%;
+  }
+
+  .hero-content h3{
+
+    font-size:20px;
+
+    margin-bottom:18px;
+  }
+
+  .hero-buttons{
+
+    width:100%;
+
+    flex-direction:row;
+
+    flex-wrap:nowrap;
+
+    gap:8px;
+  }
+
+  .primary-btn,
+  .secondary-btn{
+
+    flex:1;
+
+    min-width:auto;
+
+    width:100%;
+
+    padding:10px 12px;
+
+    font-size:12px;
+
+    border-radius:10px;
+  }
+
+  .nav-btn{
+
+    width:38px;
+    height:38px;
+
+    font-size:13px;
+  }
+
+  .prev-btn{
+    left:8px;
+  }
+
+  .next-btn{
+    right:8px;
+  }
+
+  .swiper-pagination-bullet{
+
+    width:8px;
+    height:8px;
+  }
+
+  .swiper-pagination-bullet-active{
+
+    width:20px;
+  }
+}
