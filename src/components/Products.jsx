@@ -1,61 +1,173 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
+
 import { Link } from "react-router-dom";
+
+import {
+  SlidersHorizontal,
+  Star,
+  Heart,
+  ShoppingCart,
+  Eye
+} from "lucide-react";
+
+import "./Products.css";
+
 function Products({
- 
-  products,
+
+  products = [],
   addToCart,
   addToWishlist,
-  cart,
+  cart = [],
   searchTerm
-})
 
+}) {
 
- {
+  /* =========================================
+      STATES
+  ========================================= */
 
-  const [category, setCategory] = useState("All");
-  const [sort, setSort] = useState("");
+  const [category, setCategory] =
+    useState("All");
 
-  // FILTER
+  const [sort, setSort] =
+    useState("");
 
-  let filteredProducts = [...products];
+  const [budget, setBudget] =
+    useState("");
 
-  if (category !== "All") {
-    filteredProducts = filteredProducts.filter(
-      (p) => p.category === category
-    );
-  }
+  const [brand, setBrand] =
+    useState("");
 
-if (searchTerm) {
+  const [brake, setBrake] =
+    useState("");
 
-  filteredProducts = filteredProducts.filter(
-    (p) =>
-      p.name
-        .toLowerCase()
-        .includes(
-          searchTerm.toLowerCase()
-        )
-  );
+  /* =========================================
+      FILTER PRODUCTS
+  ========================================= */
 
-}
-  // SORT
+  const filteredProducts =
+    useMemo(() => {
 
-  if (sort === "low") {
-    filteredProducts.sort(
-      (a, b) => a.price - b.price
-    );
-  }
+      let filtered = [...products];
 
-  if (sort === "high") {
-    filteredProducts.sort(
-      (a, b) => b.price - a.price
-    );
-  }
+      /* CATEGORY */
 
-  if (sort === "rating") {
-    filteredProducts.sort(
-      (a, b) => b.rating - a.rating
-    );
-  }
+      if (category !== "All") {
+
+        filtered = filtered.filter(
+
+          (p) =>
+            p.category === category
+
+        );
+
+      }
+
+      /* SEARCH */
+
+      if (searchTerm) {
+
+        filtered = filtered.filter(
+
+          (p) =>
+
+            p.name
+              .toLowerCase()
+              .includes(
+                searchTerm.toLowerCase()
+              )
+
+        );
+
+      }
+
+      /* BUDGET */
+
+      if (budget) {
+
+        filtered = filtered.filter(
+
+          (p) =>
+            p.price <= Number(budget)
+
+        );
+
+      }
+
+      /* BRAND */
+
+      if (brand) {
+
+        filtered = filtered.filter(
+
+          (p) =>
+
+            p.brand
+              ?.toLowerCase()
+              ===
+            brand.toLowerCase()
+
+        );
+
+      }
+
+      /* BRAKES */
+
+      if (brake) {
+
+        filtered = filtered.filter(
+
+          (p) =>
+
+            p.brake
+              ?.toLowerCase()
+              ===
+            brake.toLowerCase()
+
+        );
+
+      }
+
+      /* SORT */
+
+      if (sort === "low") {
+
+        filtered.sort(
+          (a, b) =>
+            a.price - b.price
+        );
+
+      }
+
+      if (sort === "high") {
+
+        filtered.sort(
+          (a, b) =>
+            b.price - a.price
+        );
+
+      }
+
+      if (sort === "rating") {
+
+        filtered.sort(
+          (a, b) =>
+            b.rating - a.rating
+        );
+
+      }
+
+      return filtered;
+
+    }, [
+      products,
+      category,
+      sort,
+      searchTerm,
+      budget,
+      brand,
+      brake
+    ]);
 
   return (
 
@@ -63,253 +175,403 @@ if (searchTerm) {
 
       <div className="container">
 
-        <h2 className="section-title">
-          Our Premium Bicycles
-        </h2>
+        {/* =========================================
+            TITLE
+        ========================================= */}
 
-        {/* FILTERS */}
+        <div className="products-top">
 
-        <div className="filters">
+          <h2 className="section-title">
 
-<select>
+            Premium Bicycle Collection
 
-  {/* CATEGORY */}
+          </h2>
 
-  <option value="All">
-    All Categories
-  </option>
+          <p>
 
-  <option value="Mountain">
-    Mountain Bikes
-  </option>
+            Discover stylish and premium
+            bicycles for every rider.
 
-  <option value="Road">
-    Road Bikes
-  </option>
-
-  <option value="Electric">
-    Electric Bikes
-  </option>
-
-  <option value="Kids">
-    Kids Bikes
-  </option>
-
-  <option value="Hybrid">
-    Hybrid Bikes
-  </option>
-
-  <option value="BMX">
-    BMX Bikes
-  </option>
-
-  {/* PRICE */}
-
-  <option value="Under10000">
-    Under ₹10,000
-  </option>
-
-  <option value="10000-20000">
-    ₹10,000 - ₹20,000
-  </option>
-
-  <option value="20000-50000">
-    ₹20,000 - ₹50,000
-  </option>
-
-  <option value="Above50000">
-    Above ₹50,000
-  </option>
-
-  {/* BRAND */}
-
-  <option value="Hero">
-    Hero
-  </option>
-
-  <option value="Firefox">
-    Firefox
-  </option>
-
-  <option value="Montra">
-    Montra
-  </option>
-
-  <option value="Btwin">
-    Btwin
-  </option>
-
-  <option value="Trek">
-    Trek
-  </option>
-
-  {/* BRAKES */}
-
-  <option value="Disc">
-    Disc Brake
-  </option>
-
-  <option value="Hydraulic">
-    Hydraulic Brake
-  </option>
-
-  <option value="Rim">
-    Rim Brake
-  </option>
-
-  {/* GEAR */}
-
-  <option value="Gear">
-    Geared
-  </option>
-
-  <option value="NonGear">
-    Non-Geared
-  </option>
-
-  {/* WHEEL SIZE */}
-
-  <option value="24T">
-    24T Wheel
-  </option>
-
-  <option value="26T">
-    26T Wheel
-  </option>
-
-  <option value="27T">
-    27.5T Wheel
-  </option>
-
-  <option value="29T">
-    29T Wheel
-  </option>
-
-</select>
-
-          <select
-            value={sort}
-            onChange={(e) =>
-              setSort(e.target.value)
-            }
-          >
-
-            <option value="">
-              Sort By
-            </option>
-
-            <option value="low">
-              Price Low to High
-            </option>
-
-            <option value="high">
-              Price High to Low
-            </option>
-
-            <option value="rating">
-              Top Rated
-            </option>
-
-          </select>
+          </p>
 
         </div>
 
-        {/* PRODUCTS */}
+        {/* =========================================
+            FILTERS
+        ========================================= */}
+
+        <div className="filters-wrapper">
+
+          <div className="filter-title">
+
+            <SlidersHorizontal size={18} />
+
+            <span>
+              Smart Filters
+            </span>
+
+          </div>
+
+          <div className="filters">
+
+            {/* CATEGORY */}
+
+            <select
+              value={category}
+              onChange={(e) =>
+                setCategory(
+                  e.target.value
+                )
+              }
+            >
+
+              <option value="All">
+                All Categories
+              </option>
+
+              <option value="Mountain">
+                Mountain Bikes
+              </option>
+
+              <option value="Road">
+                Road Bikes
+              </option>
+
+              <option value="Electric">
+                Electric Bikes
+              </option>
+
+              <option value="Kids">
+                Kids Bikes
+              </option>
+
+              <option value="Hybrid">
+                Hybrid Bikes
+              </option>
+
+              <option value="BMX">
+                BMX Bikes
+              </option>
+
+            </select>
+
+            {/* SORT */}
+
+            <select
+              value={sort}
+              onChange={(e) =>
+                setSort(
+                  e.target.value
+                )
+              }
+            >
+
+              <option value="">
+                Sort By
+              </option>
+
+              <option value="low">
+                Price Low → High
+              </option>
+
+              <option value="high">
+                Price High → Low
+              </option>
+
+              <option value="rating">
+                Top Rated
+              </option>
+
+            </select>
+
+            {/* BUDGET */}
+
+            <select
+              value={budget}
+              onChange={(e) =>
+                setBudget(
+                  e.target.value
+                )
+              }
+            >
+
+              <option value="">
+                Budget Range
+              </option>
+
+              <option value="3500">
+                Under ₹3,500
+              </option>
+
+              <option value="4500">
+                Under ₹4,500
+              </option>
+
+              <option value="6500">
+                Under ₹6,500
+              </option>
+
+              <option value="9500">
+                Under ₹9,500
+              </option>
+
+              <option value="12500">
+                Under ₹12,500
+              </option>
+
+              <option value="18500">
+                Under ₹18,500
+              </option>
+
+            </select>
+
+            {/* BRAND */}
+
+            <select
+              value={brand}
+              onChange={(e) =>
+                setBrand(
+                  e.target.value
+                )
+              }
+            >
+
+              <option value="">
+                Brand
+              </option>
+
+              <option value="Hero">
+                Hero
+              </option>
+
+              <option value="Firefox">
+                Firefox
+              </option>
+
+              <option value="Montra">
+                Montra
+              </option>
+
+              <option value="Btwin">
+                Btwin
+              </option>
+
+              <option value="Trek">
+                Trek
+              </option>
+
+            </select>
+
+            {/* BRAKES */}
+
+            <select
+              value={brake}
+              onChange={(e) =>
+                setBrake(
+                  e.target.value
+                )
+              }
+            >
+
+              <option value="">
+                Brake Type
+              </option>
+
+              <option value="disc">
+                Disc Brake
+              </option>
+
+              <option value="hydraulic">
+                Hydraulic Brake
+              </option>
+
+              <option value="rim">
+                Rim Brake
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+        {/* =========================================
+            PRODUCT GRID
+        ========================================= */}
 
         <div className="products-grid">
 
-          {filteredProducts.map((product) => {
+          {filteredProducts.length > 0 ? (
 
-            const inCart = cart?.find(
-              (item) => item.id === product.id
-            );
+            filteredProducts.map(
+              (product) => {
 
-            return (
+                const inCart =
+                  cart.find(
+                    (item) =>
+                      item.id ===
+                      product.id
+                  );
 
-              <div
-                className="product-card"
-                key={product.id}
-              >
+                return (
 
-                <div className="product-image">
+                  <div
+                    className="product-card"
+                    key={product.id}
+                  >
 
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                  />
+                    {/* IMAGE */}
 
-                </div>
+                    <div className="product-image">
 
-                <div className="product-info">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                      />
 
-                  <h3 className="product-title">
-                    {product.name}
-                  </h3>
+                      {/* BADGE */}
 
-                  <div className="rating">
-                    ⭐ {product.rating}
+                      <div className="product-badge">
+
+                        Premium
+
+                      </div>
+
+                    </div>
+
+                    {/* INFO */}
+
+                    <div className="product-info">
+
+                      <div className="product-rating">
+
+                        <Star
+                          size={15}
+                          fill="gold"
+                        />
+
+                        <span>
+
+                          {product.rating}
+
+                        </span>
+
+                      </div>
+
+                      <h3 className="product-title">
+
+                        {product.name}
+
+                      </h3>
+
+                      <div className="price-box">
+
+                        <span className="product-price">
+
+                          ₹
+                          {product.price.toLocaleString()}
+
+                        </span>
+
+                      </div>
+
+                      {/* BUTTONS */}
+
+                      <div className="product-buttons">
+
+                        {/* CART */}
+
+                        <button
+
+                          className={`btn ${
+                            inCart
+                              ? "btn-dark"
+                              : "btn-primary"
+                          }`}
+
+                          onClick={() =>
+                            addToCart(product)
+                          }
+                        >
+
+                          <ShoppingCart size={16} />
+
+                          {inCart
+                            ? "Added"
+                            : "Add To Cart"}
+
+                        </button>
+
+                        {/* DETAILS */}
+
+                        <Link
+
+                          to={`/products/${product.id}`}
+
+                          className="btn btn-dark"
+                        >
+
+                          <Eye size={16} />
+
+                          Details
+
+                        </Link>
+
+                        {/* WISHLIST */}
+
+                        <button
+
+                          className="wishlist-btn"
+
+                          onClick={() =>
+                            addToWishlist(
+                              product
+                            )
+                          }
+                        >
+
+                          <Heart size={18} />
+
+                        </button>
+
+                      </div>
+
+                    </div>
+
                   </div>
 
-                  <div className="price-box">
+                );
 
-                    <span className="product-price">
-                      ₹{product.price.toLocaleString()}
-                    </span>
+              }
+            )
 
-                  </div>
-<div className="product-buttons">
+          ) : (
 
-  <button
-    className={`btn ${
-      inCart
-        ? "btn-dark"
-        : "btn-primary"
-    }`}
-    onClick={() =>
-      addToCart(product)
-    }
-  >
+            <div className="no-products">
 
-    {inCart
-      ? "Added ✓"
-      : "Add To Cart"}
+              <h2>
+                No Products Found 😢
+              </h2>
 
-  </button>
+              <p>
 
-  {/* VIEW DETAILS BUTTON */}
+                Try changing filters
+                or search keyword.
 
-  <Link
-    to={`/products/${product.id}`}
-    className="btn btn-dark"
-  >
-    View Details
-  </Link>
+              </p>
 
-  <button
-    className="wishlist-btn"
-    onClick={() =>
-      addToWishlist(product)
-    }
-  >
-    ❤️
-  </button>
+            </div>
 
-           </div>
-                  </div>
-
-                </div>
-
-            
-
-            );
-          })}
+          )}
 
         </div>
 
       </div>
 
     </section>
+
   );
+
 }
 
 export default Products;
